@@ -11,25 +11,40 @@
     <title>The Best Player</title>
     <style>
         body {
-            position: relative fixed center;
+            background-image: url("/images/background.jpg");
+            background-position: center relative;
+            background-repeat: repeat-y;
+            background-size: cover;
+        }
+        th, tr, td {
+            text-align: center;
         }
     </style>
   </head>
-  <body background="/images/background.jpg">
+  <body>
     <br>
     <br>
     <div class="container">
+        @if(session('sukses'))
+            <script>
+                alert("Sukses");
+            </script>
+        @endif
         <div class="row">
             {{-- <img src="/images/background.jpg" class="img-fluid big" alt="background" style="fixed">  --}}
             <div class="col">
-                <br><br><br>
-                <p class="h1 font-weight-bold text-md-right text-light">The Best Mobile Legend Players</p>
-                <br><br><br><br>
+                <br><br><br><br><br>
+                <p class="h1 font-weight-bold text-md-right text-light">The Best Mobile Legends Player</p>
+                <br><br><br><br><br>
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#exampleModal">
-                Add Nick
+                Add New Player
             </button>
-            <br><br>
+            <!-- Form Search -->
+            <form class="form-inline my-2 my-lg-0" method="GET" action="/bestplayer">
+                <input class="form-control mr-sm-2" name="cari" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -45,28 +60,30 @@
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <label for="nickname">Nickname</label>
-                                <input type="text" name="nickname" class="form-control" id="nickname" placeholder="Nickname">
+                                <input type="text" name="nickname" class="form-control" id="nickname" placeholder="Nickname" required>
                             </div>
                             <div class="form-group">
                                 <label for="point">Point</label>
-                                <input type="text" name="point" class="form-control" id="point" placeholder="Point">
+                                <input type="text" name="point" class="form-control" id="point" placeholder="Point" required>
                             </div>
                     </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="submit" id="sub" class="btn btn-primary">Save</button>
                         </form>
                         </div>
                     </div>
                 </div>
             </div>
             <br>
+                <div class="table-responsive">
                 <table class="table table-hover table-dark">
                     <thead>
                         <tr>
-                            <th scope="col">No</th>
-                            <th scope="col">Nickname</th>
-                            <th scope="col">Points</th>
+                            <th>No</th>
+                            <th>Nickname</th>
+                            <th>Points</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -74,13 +91,15 @@
                         @foreach ($data_best as $best)
                         <?php $no++; ?>
                             <tr>
-                                <td>{{ $no }}</td>
+                                <th scope="row">{{ $no }}</th>
                                 <td>{{ $best->nickname }}</td>
                                 <td>{{ $best->point }}</td>
+                                <td><a href="#" class="btn btn-info">Add Point</a></td>
                             </tr>
                         @endforeach
-                    </tbody>
+                    </tbody>    
                 </table>
+                </div>
             </div>
         </div>
     </div>

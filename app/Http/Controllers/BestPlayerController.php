@@ -7,16 +7,19 @@ use Illuminate\Support\Facades\DB;
 
 class BestPlayerController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // $data_best = \App\Best::all();
-        $data_best = DB::table('best_player')->orderBy('point', 'desc')->get();
+        if ($request->has('cari')){
+            $data_best = DB::table('best_player')->where('nickname','LIKE','%'.$request->cari.'%')->get();
+        } else {
+            $data_best = DB::table('best_player')->orderBy('point', 'desc')->get();
+        }
         return view('best.index',['data_best' => $data_best]);
     }
 
     public function create(Request $request)
     {
         \App\Best::create($request->all());
-        return redirect('/bestplayer');
+        return redirect('/bestplayer')->with('sukses','sukses');
     }
 }
