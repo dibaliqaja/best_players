@@ -13,4 +13,10 @@ class BestPlayerController extends Controller
         $data_best = DB::table('best_player')->orderBy('point', 'desc')->get();
         return view('best.index',['data_best' => $data_best]);
     }
+
+    public function create(Request $request)
+    {
+        \App\Best::create($request->all());
+        return redirect('/bestplayer');
+    }
 }

@@ -16,3 +16,4 @@ Route::get('/', function () {
 });
 
 Route::get('/bestplayer','BestPlayerController@index');
+Route::post('/bestplayer/create','BestPlayerController@create');
