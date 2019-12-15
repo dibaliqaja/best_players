@@ -20,6 +20,20 @@ class BestPlayerController extends Controller
     public function create(Request $request)
     {
         \App\Best::create($request->all());
-        return redirect('/bestplayer')->with('sukses','sukses');
+        return redirect('/bestplayer')->with('sukses','Sukses Ditambahkan');
+    }
+
+    public function update(Request $request)
+    {
+        $a = \App\Best::findOrfail($request->bestid);
+        $a->update($request->all());
+        return redirect('/bestplayer')->with('sukses','Sukses Diedit');
+    }
+
+    public function delete($id)
+    {
+        $b = \App\Best::find($id);
+        $b->delete();
+        return redirect('/bestplayer')->with('sukses','Sukses Dihapus');
     }
 }
