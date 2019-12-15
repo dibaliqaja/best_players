@@ -152,8 +152,8 @@
                             <tr>
                                 <th scope="row">{{ $no }}</th>
                                 <td><button class="btn btn-warning">{{ $best->nickname }}</button></td>
-                                <td><button class="btn btn-light">{{ $best->point }}</button></td>
-                                <td><button class="btn btn-info addpointbtn" data-bestid="{{$best->id}}" data-nick="{{$best->nickname}}" data-point="{{$best->point}}" data-toggle="modal" data-target="#edModal">Add Point</button></td>
+                                <td><button class="btn btn-light">{{ floor($best->point) }}</button></td>
+                                <td><button class="btn btn-info addpointbtn" data-bestid="{{$best->id}}" data-nick="{{$best->nickname}}" data-point="{{floor($best->point)}}" data-toggle="modal" data-target="#edModal">Add Point</button></td>
                                 <td><a href="/bestplayer/{{ $best->id }}/delete" class="btn btn-danger" onclick="return confirm('Yakin?')">Delete</a></td>
                             </tr>
                         @endforeach
