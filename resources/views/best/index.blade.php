@@ -12,8 +12,9 @@
         body {
             background-image: url("/images/background.jpg");
             background-position: center relative;
-            background-repeat: repeat-y;
-            background-size: cover;
+            background-repeat: no-repeat;
+            height: 100%;
+            background-size: auto;
         }
         th, tr, td {
             text-align: center;
@@ -78,7 +79,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="point">Point</label>
-                                <input type="text" name="point" class="form-control" id="point" placeholder="Point" required>
+                                <input type="text" name="point" class="form-control" id="point" placeholder="Point" value="0" readonly>
                             </div>
                     </div>
                         <div class="modal-footer">
@@ -106,23 +107,28 @@
                             <input type="hidden" name="bestid" id="bestid">
                             <div class="form-group">
                                 <label for="nickname">Nickname</label>
-                                <input type="text" name="nickname" class="form-control" id="nickname" placeholder="Nickname">
+                                <input type="text" name="nickname" class="form-control" id="nickname" placeholder="Nickname" readonly>
+                                <small class="form-text text-muted">Nickname Player</small>
                             </div>
                             <div class="form-group">
                                 <label for="point">Point</label>
                                 <input type="text" name="point" class="form-control" id="point" placeholder="Point">
+                                <small class="form-text text-primary">Point yang akan di Update</small>
                             </div>
                             <div class="form-group">
                                 <label for="newpoint1">Old Point</label>
-                                <input type="text" name="newpoint1" class="form-control" id="newpoint1" placeholder="Old Point">
+                                <input type="text" name="newpoint1" class="form-control" id="newpoint1" placeholder="Point Lama">
+                                <small class="form-text text-danger">Form input ini hanya untuk menghitung point (Masukkan Point Lama)</small>
                             </div>
                             <div class="form-group">
                                 <label for="newpoint2">New Point</label>
-                                <input type="text" name="newpoint2" class="form-control" id="newpoint2" placeholder="New Point">
+                                <input type="text" name="newpoint2" class="form-control" id="newpoint2" placeholder="Point Baru">
+                                <small class="form-text text-danger">Form input ini hanya untuk menghitung point (Masukkan Point Baru)</small>
                             </div>
                             <div class="form-group">
                                 <label for="topoint">Total Point</label>
                                 <input type="text" name="topoint" class="form-control" id="topoint"  placeholder="Total Point">
+                                <small class="form-text text-danger">Total Point Adalah Hasil Penjumlahan dari Point Lama dan Point Baru</small>
                             </div>
                     </div>
                         <div class="modal-footer">
@@ -157,7 +163,7 @@
                                 <td><a href="/bestplayer/{{ $best->id }}/delete" class="btn btn-danger" onclick="return confirm('Yakin?')">Delete</a></td>
                             </tr>
                         @endforeach
-                    </tbody>    
+                    </tbody>
                 </table>
                 </div>
             </div>
@@ -171,11 +177,11 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script>
         $('#edModal').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget);  
+            var button = $(event.relatedTarget);
             var nickname = button.data('nick');
             var point = button.data('point');
             var bestid = button.data('bestid');
-            
+
             var modal = $(this);
             modal.find('.modal-body #nickname').val(nickname);
             modal.find('.modal-body #point').val(point);

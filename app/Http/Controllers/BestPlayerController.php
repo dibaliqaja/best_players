@@ -19,8 +19,13 @@ class BestPlayerController extends Controller
 
     public function create(Request $request)
     {
-        \App\Best::create($request->all());
-        return redirect('/bestplayer')->with('sukses','Sukses Ditambahkan');
+        $validatedData = $request->validate([
+            'nickname' => 'required|unique:best_player',
+        ]);
+        if ($validatedData) {
+            \App\Best::create($request->all());
+            return redirect('/bestplayer')->with('sukses','Sukses Ditambahkan');
+        }
     }
 
     public function update(Request $request)
